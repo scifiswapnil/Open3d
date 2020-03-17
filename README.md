@@ -31,16 +31,16 @@ Open3D is an open-source library that supports rapid development of software tha
 ---
 ## Build steps
 - `git clone --recursive https://github.com/scifiswapnil/Open3d-homeWork Open3d`
-- cd Open3d 
+- `cd Open3d`
 - dependencies setup 
 	- for ubuntu : ` .util/scripts/install-deps-ubuntu.sh`
 	- for macOS  :  `util/scripts/install-deps-os` 
 - `mkdir build && cd build`
-- cmake -DCMAKE_INSTALL_PREFIX=<open3d_install_directory> -DPYTHON_EXECUTABLE=<python_executable_directory> -DPYTHON_LIBRARIES=<python_library_directory> ..
+- `cmake -DCMAKE_INSTALL_PREFIX=<open3d_install_directory> -DPYTHON_EXECUTABLE=<python_executable_directory> -DPYTHON_LIBRARIES=<python_library_directory> ..`
 - make 
 	- for ubuntu : `make-j$(nproc)`
 	- for macOS : `make -j$(sysctl -n hw.physicalcpu)`
-- sudo make install 
+- `sudo make install`
 - For python-pip package use `make install-pip-package`
 
 ---
@@ -102,6 +102,9 @@ Open3D is an open-source library that supports rapid development of software tha
 - [python unit tests](https://github.com/scifiswapnil/Open3d-homeWork/blob/master/src/UnitTest/Python/test_identicallyColoredConnectedComponents.py)
 	- usage `pytest ~/Open3d/src/UnitTest/Python `
 
+#### Note :
+- C++ and python unit tests are added to the existing build system. 
+- You need to set `BUILD_UNIT_TESTS` flag to true during the cmake for the build system to make the executables
 ---
 ## Citation
 Please cite [our work](https://arxiv.org/abs/1801.09847) if you use Open3D.
