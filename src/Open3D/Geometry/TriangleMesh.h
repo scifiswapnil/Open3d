@@ -33,7 +33,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-
+#include <list>
+#include <iostream>  
 #include "Open3D/Geometry/Image.h"
 #include "Open3D/Geometry/MeshBase.h"
 #include "Open3D/Utility/Helper.h"
@@ -51,7 +52,7 @@ class TetraMesh;
 ///
 /// Optionally, the mesh may also contain triangle normals, vertex normals and
 /// vertex colors.
-class TriangleMesh : public MeshBase {
+class TriangleMesh : public MeshBase { 
 public:
     /// \brief Default Constructor.
     TriangleMesh() : MeshBase(Geometry::GeometryType::TriangleMesh) {}
@@ -80,6 +81,13 @@ public:
     bool HasTriangles() const {
         return vertices_.size() > 0 && triangles_.size() > 0;
     }
+
+    int CheckColor(int indx = 0) const;
+    
+    void DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],int idx_color, std::vector<int> *vector_store); 
+    // void DepthFirstSearchConnectedComponentSearch(int current_idx); 
+    
+    std::vector<std::vector<int>> IdenticallyColoredConnectedComponents();
 
     /// Returns `true` if the mesh contains triangle normals.
     bool HasTriangleNormals() const {

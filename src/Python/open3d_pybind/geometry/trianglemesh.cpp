@@ -160,6 +160,19 @@ void pybind_trianglemesh(py::module &m) {
                  "Returns ``True`` if the mesh contains vertices.")
             .def("has_triangles", &geometry::TriangleMesh::HasTriangles,
                  "Returns ``True`` if the mesh contains triangles.")
+            .def("dfs",
+                  &geometry::TriangleMesh::DepthFirstSearchConnectedComponentSearch,
+                  "dfs reults",
+                  "current_idx"_a = 0,
+                  "visited_list"_a,
+                  "idx_color"_a = 0,
+                  "vector_store"_a)
+            .def("identically_colored_connected_components", 
+                  &geometry::TriangleMesh::IdenticallyColoredConnectedComponents,
+                  "Returns test ")
+            .def("check_color", &geometry::TriangleMesh::CheckColor,
+                 "indx"_a,
+                 "Returns color of the vertex")
             .def("has_vertex_normals",
                  &geometry::TriangleMesh::HasVertexNormals,
                  "Returns ``True`` if the mesh contains vertex normals.")

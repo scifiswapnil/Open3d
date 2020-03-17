@@ -28,6 +28,7 @@
 #include "Open3D/Geometry/BoundingVolume.h"
 #include "Open3D/Geometry/PointCloud.h"
 #include "TestUtility/UnitTest.h"
+#include "gmock/gmock.h"
 
 using namespace Eigen;
 using namespace open3d;
@@ -844,6 +845,22 @@ TEST(TriangleMesh, HasVertices) {
 
     EXPECT_TRUE(tm.HasVertices());
 }
+
+TEST(TriangleMesh, IdenticallyColoredConnectedComponents){
+    geometry::TriangleMesh mesh0;
+    mesh0.vertices_ = {{0, 0, 0}, {0, 0, 1}, {0, 1, 1}, {0, 0, 2}, {1, 0.5, 1}};
+    mesh0.triangles_ = {{0, 1, 2}, {1, 2, 3}, {1, 2, 4}};
+    std::vector<std::vector<int>> test;
+    try{
+    test = mesh0.IdenticallyColoredConnectedComponents();}
+    catch(exception& err){
+        EXPECT_EQ(err.what(),std::string("\x1B[1;31m[Open3D ERROR] courrpted mesh file\x1B[0;m"));
+    }
+    mesh0.vertex_colors_ = {{0,0,1},{0,0,1},{0,0,1},{0,1,0},{0,1,0}};
+    test = mesh0.IdenticallyColoredConnectedComponents();
+    ASSERT_THAT(test[0],testing::ElementsAre(0,1,2));
+}
+
 
 TEST(TriangleMesh, HasTriangles) {
     int size = 100;

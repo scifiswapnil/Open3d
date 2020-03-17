@@ -12,6 +12,7 @@ macro(EXAMPLE_CPP EXAMPLE_CPP_NAME)
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/examples")
 endmacro(EXAMPLE_CPP)
 
+EXAMPLE_CPP(solution                  ${CMAKE_PROJECT_NAME})
 EXAMPLE_CPP(CameraPoseTrajectory      ${CMAKE_PROJECT_NAME})
 EXAMPLE_CPP(ColorMapOptimization      ${CMAKE_PROJECT_NAME})
 EXAMPLE_CPP(DepthCapture              ${CMAKE_PROJECT_NAME})
