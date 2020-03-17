@@ -1218,23 +1218,13 @@ int TriangleMesh::EulerPoincareCharacteristic() const {
     return V + F - E;
 }
 
-int TriangleMesh::CheckColor(int cidx) const{ 
-    Eigen::Vector3d red(1,0,0),green(0,1,0),blue(0,0,1);
-    if (vertex_colors_[cidx] == red)
-        return 0;
-    if (vertex_colors_[cidx] == green)
-        return 1;
-    if (vertex_colors_[cidx] == blue)
-        return 2;
-    return 9 ;
-}
 
-void TriangleMesh::DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],int idx_color, std::vector<int> *vector_store) {
+void TriangleMesh::DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],Eigen::Vector3d idx_color, std::vector<int> *vector_store) {
     visited_list[current_idx] = true; 
 	vector_store->push_back(current_idx);
     for (int nbidx : adjacency_list_[current_idx]) {
-        if (visited_list[nbidx] == false && CheckColor(nbidx) == idx_color)
-            DepthFirstSearchConnectedComponentSearch(nbidx, visited_list,idx_color,vector_store);
+        if (visited_list[nbidx] == false && vertex_colors_[nbidx] == idx_color)
+            DepthFirstSearchConnectedComponentSearch(nbidx, visited_list,vertex_colors_[nbidx],vector_store);
     }
 }
 
@@ -1242,7 +1232,7 @@ std::vector<std::vector<int>> TriangleMesh::IdenticallyColoredConnectedComponent
     ComputeAdjacencyList();
     std::vector<std::vector<int>> result_array ;
     if (vertex_colors_.size() != vertices_.size() || vertices_.size() == 0){
-        utility::LogError("courrpted mesh file");
+        utility::LogError("corrupted mesh file");
         return result_array;
     } 
     bool *visited = new bool[vertices_.size()]; 
@@ -1251,7 +1241,7 @@ std::vector<std::vector<int>> TriangleMesh::IdenticallyColoredConnectedComponent
     for (size_t tidx = 0; tidx < vertices_.size(); tidx++) { 
         if (visited[tidx] == false) { 
             std::vector<int> vec_store;
-            DepthFirstSearchConnectedComponentSearch(tidx, visited, CheckColor(tidx) , &vec_store);
+            DepthFirstSearchConnectedComponentSearch(tidx, visited, vertex_colors_[tidx] , &vec_store);
             std::sort(vec_store.begin(),vec_store.end()); 
             result_array.push_back(vec_store);
         } 

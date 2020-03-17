@@ -82,9 +82,8 @@ public:
         return vertices_.size() > 0 && triangles_.size() > 0;
     }
 
-    int CheckColor(int indx = 0) const;
     
-    void DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],int idx_color, std::vector<int> *vector_store); 
+    void DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],Eigen::Vector3d idx_color, std::vector<int> *vector_store); 
     // void DepthFirstSearchConnectedComponentSearch(int current_idx); 
     
     std::vector<std::vector<int>> IdenticallyColoredConnectedComponents();
