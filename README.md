@@ -45,9 +45,9 @@ Open3D is an open-source library that supports rapid development of software tha
 
 ---
 ## Function implementation, bindings and algorithm used 
-- [C++ function defination ](https://github.com/scifiswapnil/Open3d-homeWork/blob/7424ba31e42c8119f54d2836f335c7cde1931a2c/src/Open3D/Geometry/TriangleMesh.h#L89)
-- [C++ function implementation](https://github.com/scifiswapnil/Open3d-homeWork/blob/7424ba31e42c8119f54d2836f335c7cde1931a2c/src/Open3D/Geometry/TriangleMesh.cpp#L1231) 
-- [Python binding](https://github.com/scifiswapnil/Open3d-homeWork/blob/7424ba31e42c8119f54d2836f335c7cde1931a2c/src/Python/open3d_pybind/geometry/trianglemesh.cpp#L163) 
+- [C++ function definition ](https://github.com/scifiswapnil/Open3d-homeWork/blob/7424ba31e42c8119f54d2836f335c7cde1931a2c/src/Open3D/Geometry/TriangleMesh.h#L89)
+- [C++ function implementation](https://github.com/scifiswapnil/Open3d-homeWork/blob/b4d6623bce66c20a533feb85b0f3d6352eb6d080/src/Open3D/Geometry/TriangleMesh.cpp#L1235) 
+- [Python binding](https://github.com/scifiswapnil/Open3d-homeWork/blob/b4d6623bce66c20a533feb85b0f3d6352eb6d080/src/Python/open3d_pybind/geometry/trianglemesh.cpp#L163) 
 
 #### Algorithm used : 
 ```
@@ -95,7 +95,7 @@ Open3D is an open-source library that supports rapid development of software tha
 ---		
 ## Unit tests 
 
-- [C++ unit tests](https://github.com/scifiswapnil/Open3d-homeWork/blob/7424ba31e42c8119f54d2836f335c7cde1931a2c/src/UnitTest/Geometry/TriangleMesh.cpp#L849)
+- [C++ unit tests](https://github.com/scifiswapnil/Open3d-homeWork/blob/b4d6623bce66c20a533feb85b0f3d6352eb6d080/src/UnitTest/Geometry/TriangleMesh.cpp#L849)
 	- unit tests are added to the build system and can be directly used once built
 	- usage `./Open3d/build/bin/unitTests`
 
