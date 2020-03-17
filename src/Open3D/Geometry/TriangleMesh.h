@@ -82,10 +82,10 @@ public:
         return vertices_.size() > 0 && triangles_.size() > 0;
     }
 
-    
+    /// DFS recursive function with color check
     void DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],Eigen::Vector3d idx_color, std::vector<int> *vector_store); 
-    // void DepthFirstSearchConnectedComponentSearch(int current_idx); 
     
+    /// Returns array[array] of all connected elements in the mesh with same color vertices.
     std::vector<std::vector<int>> IdenticallyColoredConnectedComponents();
 
     /// Returns `true` if the mesh contains triangle normals.

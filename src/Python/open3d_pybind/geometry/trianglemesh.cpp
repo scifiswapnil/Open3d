@@ -162,7 +162,7 @@ void pybind_trianglemesh(py::module &m) {
                  "Returns ``True`` if the mesh contains triangles.")
             .def("identically_colored_connected_components", 
                   &geometry::TriangleMesh::IdenticallyColoredConnectedComponents,
-                  "Returns test ")
+                  "Returns array[array] of all connected elements in the mesh with same color vertices.")
             .def("has_vertex_normals",
                  &geometry::TriangleMesh::HasVertexNormals,
                  "Returns ``True`` if the mesh contains vertex normals.")

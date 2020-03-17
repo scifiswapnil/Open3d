@@ -1220,32 +1220,46 @@ int TriangleMesh::EulerPoincareCharacteristic() const {
 
 
 void TriangleMesh::DepthFirstSearchConnectedComponentSearch(int current_idx, bool visited_list[],Eigen::Vector3d idx_color, std::vector<int> *vector_store) {
+    // mark element as visited and store in temporary array
     visited_list[current_idx] = true; 
 	vector_store->push_back(current_idx);
+
+    //find adjacent elements and check with respect to colors
     for (int nbidx : adjacency_list_[current_idx]) {
         if (visited_list[nbidx] == false && vertex_colors_[nbidx] == idx_color)
+            //recursively call with not the last element
             DepthFirstSearchConnectedComponentSearch(nbidx, visited_list,vertex_colors_[nbidx],vector_store);
     }
 }
 
 std::vector<std::vector<int>> TriangleMesh::IdenticallyColoredConnectedComponents(){
+    //compute adjacency list of the mesh
     ComputeAdjacencyList();
     std::vector<std::vector<int>> result_array ;
+    
+    // check the vertices size and vertices color 
     if (vertex_colors_.size() != vertices_.size() || vertices_.size() == 0){
         utility::LogError("corrupted mesh file");
         return result_array;
     } 
+
+    // init. a visited array false
     bool *visited = new bool[vertices_.size()]; 
     for(size_t bidx = 0; bidx < vertices_.size(); bidx++) 
         visited[bidx] = false; 
+
+    // visit each non-visited node with DepthFirstSearch
     for (size_t tidx = 0; tidx < vertices_.size(); tidx++) { 
         if (visited[tidx] == false) { 
             std::vector<int> vec_store;
             DepthFirstSearchConnectedComponentSearch(tidx, visited, vertex_colors_[tidx] , &vec_store);
+            // sort all elements ascendingly
             std::sort(vec_store.begin(),vec_store.end()); 
             result_array.push_back(vec_store);
         } 
     } 
+
+    // sort all the connected elements ascendingly by the smallest element in each list
     std::sort(result_array.begin(), result_array.end(), [](const std::vector<int> & a, const std::vector<int> & b){ return a[0] < b[0];});    
     return result_array;
 }
